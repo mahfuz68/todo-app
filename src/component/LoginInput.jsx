@@ -5,13 +5,13 @@ export default function LoginInput() {
     return (
         <div>
             <label htmlFor="email">
-                <input type="email" name="email" placeholder="email" className="input-login" />
+                <input type="email" name="email" placeholder="Email" className="input-login" />
             </label>
             <label htmlFor="password">
                 <input
                     type="password"
                     name="password"
-                    placeholder="password"
+                    placeholder="Password"
                     className="input-login"
                 />
             </label>
