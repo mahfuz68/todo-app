@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+.button-primary {
+  @apply px-4 text-white transition-all rounded-lg  py-2 font-bold drop-shadow-lg duration-500 ease-in-out;
+}
