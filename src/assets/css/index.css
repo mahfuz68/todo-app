@@ -1,3 +1,94 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .dark {
+    color-scheme: dark;
+  }
+
+  .dark body {
+    background-color: #16162a;
+    color: #f3f4f6;
+  }
+
+  .dark .bg-surface-secondary {
+    background-color: #16162a;
+  }
+
+  .dark .bg-white {
+    background-color: #1a1a2e;
+  }
+
+  .dark .bg-surface {
+    background-color: #1a1a2e;
+  }
+
+  .dark .text-text-primary {
+    color: #f3f4f6;
+  }
+
+  .dark .text-text-secondary {
+    color: #9ca3af;
+  }
+
+  .dark .border,
+  .dark .border-border {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .dark .shadow-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .dark input,
+  .dark select,
+  .dark textarea {
+    background-color: #1a1a2e;
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #f3f4f6;
+  }
+
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  .dark .bg-gray-50 {
+    background-color: #16162a;
+  }
+
+  .dark .bg-gray-100 {
+    background-color: #16162a;
+  }
+
+  .dark .hover\:bg-gray-100:hover {
+    background-color: #1a1a2e;
+  }
+
+  .dark .hover\:bg-surface-secondary:hover {
+    background-color: #1a1a2e;
+  }
+
+  .dark .text-gray-500,
+  .dark .text-gray-600 {
+    color: #9ca3af;
+  }
+
+  .dark .text-gray-800 {
+    color: #f3f4f6;
+  }
+
+  .dark .border-gray-100,
+  .dark .border-gray-200 {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .dark .bg-black\/40 {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .dark .ring-offset-1 {
+    --tw-ring-offset-color: #1a1a2e;
+  }
+}
