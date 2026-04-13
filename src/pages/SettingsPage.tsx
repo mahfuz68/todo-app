@@ -7,7 +7,6 @@ export default function SettingsPage() {
   const user = useAuthStore((state) => state.user);
   const [notifications, setNotifications] = useState(true);
 
-
   return (
     <div className="max-w-2xl mx-auto">
       <motion.div
@@ -28,10 +27,18 @@ export default function SettingsPage() {
           </h2>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-primary-light flex items-center justify-center">
-                <span className="text-2xl font-semibold text-primary">
-                  {user?.avatar || user?.name?.charAt(0) || "U"}
-                </span>
+              <div className="w-16 h-16 rounded-full bg-primary-light flex items-center justify-center overflow-hidden">
+                {user?.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name || "User"}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-2xl font-semibold text-primary">
+                    {user?.name?.charAt(0) || "U"}
+                  </span>
+                )}
               </div>
               <div>
                 <p className="font-medium text-text-primary">{user?.name}</p>
@@ -46,9 +53,7 @@ export default function SettingsPage() {
             Preferences
           </h2>
           <div className="space-y-4">
-            <label className="flex items-center justify-between cursor-pointer">
-              
-            </label>
+            <label className="flex items-center justify-between cursor-pointer"></label>
             <label className="flex items-center justify-between cursor-pointer">
               <div className="flex items-center gap-3">
                 <Bell size={20} className="text-text-secondary" />
