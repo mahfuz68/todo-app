@@ -88,10 +88,18 @@ export default function Header() {
             onClick={() => setShowDropdown(!showDropdown)}
             className="flex items-center gap-3 p-2 rounded-button hover:bg-surface-secondary dark:hover:bg-slate-800 transition-colors"
           >
-            <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center">
-              <span className="text-primary font-medium">
-                {user?.avatar || user?.name?.charAt(0) || "U"}
-              </span>
+            <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center overflow-hidden">
+              {user?.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt={user.name || "User"}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-primary font-medium">
+                  {user?.name?.charAt(0) || "U"}
+                </span>
+              )}
             </div>
             <ChevronDown
               size={16}
