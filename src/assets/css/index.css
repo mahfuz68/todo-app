@@ -91,4 +91,36 @@
   .dark .ring-offset-1 {
     --tw-ring-offset-color: #1a1a2e;
   }
+
+  /* Navigation dark mode fixes */
+  .dark nav {
+    background-color: rgba(22, 22, 42, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .dark nav a {
+    color: #9ca3af;
+  }
+
+  .dark nav a:hover {
+    color: #f3f4f6;
+  }
+
+  .dark nav button {
+    color: #9ca3af;
+  }
+
+  .dark nav button:hover {
+    color: #f3f4f6;
+  }
+
+  /* Hero section dark mode */
+  .dark .bg-surface-secondary,
+  .dark section.bg-white {
+    background-color: #16162a;
+  }
+
+  .dark section.bg-surface-secondary {
+    background-color: #16162a;
+  }
 }
