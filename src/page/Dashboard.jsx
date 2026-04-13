@@ -30,18 +30,51 @@ export default function Dashboard() {
     );
   };
 
+  const updateTodo = (id, newText) => {
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo)),
+    );
+  };
+
+  const completedCount = todos.filter((t) => t.completed).length;
+  const totalCount = todos.length;
+  const progress =
+    totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+
   return (
-    <div className="min-h-screen dark:bg-gray-900 dark:text-white">
+    <div className="min-h-screen bg-[#0B0B0B]">
       <DashboardNavbar />
-      <div className="max-w-2xl mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4">My Tasks</h2>
-        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
-          <TodoInput addTodo={addTodo} />
-          <div className="mt-4">
+      <div className="max-w-[1200px] mx-auto p-4 md:p-6">
+        <div className="bg-[#0B0B0B] rounded-[24px] p-4 md:p-6">
+          {/* Progress Card */}
+          <div className="w-full h-[140px] rounded-[20px] p-6 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+            <div>
+              <h2 className="text-[22px] font-semibold text-white mb-1">
+                Daily Progress
+              </h2>
+              <p className="text-[14px] text-[#A0A0A0]">
+                Keep going! You're doing great.
+              </p>
+            </div>
+            <div className="w-[90px] h-[90px] rounded-full bg-[#FF5A3C] flex items-center justify-center">
+              <span className="text-[20px] font-bold text-white">
+                {completedCount}/{totalCount}
+              </span>
+            </div>
+          </div>
+
+          {/* Input Section */}
+          <div className="mb-6">
+            <TodoInput addTodo={addTodo} />
+          </div>
+
+          {/* Task List */}
+          <div className="bg-[#121212] rounded-[20px] p-4 border border-white/8">
             <TodoList
               todos={todos}
               deleteTodo={deleteTodo}
               toggleComplete={toggleComplete}
+              updateTodo={updateTodo}
             />
           </div>
         </div>

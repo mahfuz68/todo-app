@@ -1,30 +1,43 @@
 import React, { useState } from "react";
 
 export default function TodoInput({ addTodo }) {
-  const [todo, setTodo] = useState("");
+  const [text, setText] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (todo.trim()) {
-      addTodo(todo);
-      setTodo("");
+    if (text.trim()) {
+      addTodo(text);
+      setText("");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
+    <form onSubmit={handleSubmit} className="flex items-center gap-3">
       <input
         type="text"
-        value={todo}
-        onChange={(e) => setTodo(e.target.value)}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
         placeholder="Add a new task..."
-        className="flex-1 px-4 py-2 rounded-lg border-2 border-gray-600 bg-gray-100 dark:bg-gray-800 dark:text-white focus:outline-none focus:border-indigo-500"
+        className="flex-1 h-[50px] rounded-[25px] bg-[#1A1A1A] px-5 text-white placeholder-[#777] focus:outline-none border border-white/10"
       />
       <button
         type="submit"
-        className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-lg hover:from-indigo-500 hover:to-purple-500"
+        className="h-[50px] w-[50px] rounded-full bg-[#FF5A3C] text-white flex items-center justify-center hover:opacity-90 transition-opacity"
       >
-        Add
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 4v16m8-8H4"
+          />
+        </svg>
       </button>
     </form>
   );
