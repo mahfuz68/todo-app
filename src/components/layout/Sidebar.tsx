@@ -24,13 +24,13 @@ export default function Sidebar() {
   const logout = useAuthStore((state) => state.logout);
 
   return (
-    <aside className="w-60 h-screen bg-white border-r border-border flex flex-col fixed left-0 top-0">
+    <aside className="w-60 h-screen bg-white dark:bg-slate-900 border-r border-border dark:border-slate-700 flex flex-col fixed left-0 top-0">
       <div className="p-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-button bg-primary flex items-center justify-center">
             <span className="text-white font-display font-bold text-lg">T</span>
           </div>
-          <span className="font-display font-bold text-xl text-text-primary">
+          <span className="font-display font-bold text-xl text-text-primary dark:text-white">
             TaskFlow
           </span>
         </div>
@@ -45,14 +45,21 @@ export default function Sidebar() {
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-4 py-3 rounded-button font-medium transition-all ${
                     isActive
-                      ? "bg-primary-light text-primary"
-                      : "text-text-secondary hover:bg-surface-secondary hover:text-text-primary"
+                      ? "bg-slate-100 dark:bg-slate-800 text-primary dark:text-white"
+                      : "text-text-secondary dark:text-slate-400 hover:bg-surface-secondary dark:hover:bg-slate-800/50 hover:text-text-primary dark:hover:text-white"
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <item.icon size={20} />
+                    <item.icon
+                      size={20}
+                      className={
+                        isActive
+                          ? "text-primary dark:text-white"
+                          : "text-text-secondary dark:text-slate-400"
+                      }
+                    />
                     <span>{item.label}</span>
                     {isActive && (
                       <motion.div
@@ -68,10 +75,10 @@ export default function Sidebar() {
         </ul>
       </nav>
 
-      <div className="p-3 border-t border-border">
+      <div className="p-3 border-t border-border dark:border-slate-700">
         <button
           onClick={logout}
-          className="flex items-center gap-3 px-4 py-3 w-full rounded-button font-medium text-text-secondary hover:bg-surface-secondary hover:text-accent-red transition-colors"
+          className="flex items-center gap-3 px-4 py-3 w-full rounded-button font-medium text-text-secondary dark:text-slate-400 hover:bg-surface-secondary dark:hover:bg-slate-800/50 hover:text-accent-red dark:hover:text-red-400 transition-colors"
         >
           <LogOut size={20} />
           <span>Logout</span>

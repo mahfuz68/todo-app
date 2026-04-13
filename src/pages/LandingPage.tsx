@@ -61,33 +61,33 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface-secondary">
+    <div className="min-h-screen bg-surface-secondary dark:bg-surface-darker">
       {/* Navigation */}
-      <nav className="flex items-center justify-between px-8 py-4 bg-white/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
+      <nav className="flex items-center justify-between px-8 py-4 bg-white/80 dark:bg-surface-dark/80 backdrop-blur-md border-b border-border dark:border-border-dark sticky top-0 z-50">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-button bg-primary flex items-center justify-center">
             <span className="text-white font-display font-bold text-xl">T</span>
           </div>
-          <span className="font-display font-bold text-xl text-text-primary">
+          <span className="font-display font-bold text-xl text-text-primary dark:text-text-primary-dark">
             TaskFlow
           </span>
         </div>
         <div className="flex items-center gap-6">
           <a
             href="#features"
-            className="text-text-secondary hover:text-text-primary text-sm font-medium"
+            className="text-text-secondary dark:text-text-secondary-dark hover:text-text-primary dark:hover:text-text-primary-dark text-sm font-medium"
           >
             Features
           </a>
           <a
             href="#how"
-            className="text-text-secondary hover:text-text-primary text-sm font-medium"
+            className="text-text-secondary dark:text-text-secondary-dark hover:text-text-primary dark:hover:text-text-primary-dark text-sm font-medium"
           >
             How it works
           </a>
           <a
             href="#pricing"
-            className="text-text-secondary hover:text-text-primary text-sm font-medium"
+            className="text-text-secondary dark:text-text-secondary-dark hover:text-text-primary dark:hover:text-text-primary-dark text-sm font-medium"
           >
             Pricing
           </a>
@@ -95,13 +95,13 @@ export default function LandingPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate("/login")}
-            className="px-4 py-2 text-text-secondary hover:text-text-primary text-sm font-medium"
+            className="px-4 py-2 text-text-secondary dark:text-text-secondary-dark hover:text-text-primary dark:hover:text-text-primary-dark text-sm font-medium"
           >
             Log in
           </button>
           <button
             onClick={handleGetStarted}
-            className="px-5 py-2.5 bg-primary text-white text-sm font-medium rounded-button hover:bg-primary/90 transition-all"
+            className="px-5 py-2.5 bg-primary text-white dark:text-white text-sm font-medium rounded-button hover:bg-primary/90 transition-all"
           >
             Get started free
           </button>
