@@ -98,17 +98,20 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <div className="mb-8">
-        <h1 className="text-3xl font-display font-bold text-text-primary mb-2">
+    <div className="w-full max-w-md px-4 md:px-0">
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-2xl md:text-3xl font-display font-bold text-text-primary mb-2">
           Create your account ✨
         </h1>
-        <p className="text-text-secondary">
+        <p className="text-text-secondary text-sm md:text-base">
           Start managing your tasks efficiently
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-4 md:space-y-5"
+      >
         <Input
           label="Full Name"
           type="text"
@@ -196,9 +199,9 @@ export default function RegisterForm() {
         <button
           type="button"
           onClick={handleGoogleLogin}
-          className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-border rounded-button font-medium text-text-primary hover:bg-surface-secondary transition-colors"
+          className="w-full flex items-center justify-center gap-3 px-4 py-2.5 md:py-3 border border-border rounded-button font-medium text-text-primary hover:bg-surface-secondary transition-colors text-sm md:text-base"
         >
-          <svg viewBox="0 0 24 24" width="20" height="20">
+          <svg viewBox="0 0 24 24" width="18" className="w-4 h-4 md:w-5 md:h-5">
             <path
               fill="#4285F4"
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -220,7 +223,7 @@ export default function RegisterForm() {
         </button>
       </form>
 
-      <p className="mt-8 text-center text-sm text-text-secondary">
+      <p className="mt-6 md:mt-8 text-center text-sm text-text-secondary">
         Already have an account?{" "}
         <a href="/login" className="text-primary font-medium hover:underline">
           Sign in
