@@ -12,6 +12,8 @@ const taskSchema = z.object({
   description: z.string().optional(),
   dueDate: z.string().optional(),
   dueTime: z.string().optional(),
+  startTime: z.string().optional(),
+  endTime: z.string().optional(),
   priority: z.enum(["low", "medium", "high", "urgent"]),
   status: z.enum(["todo", "in_progress", "done"]),
   category: z.string().optional(),
@@ -55,11 +57,13 @@ export default function TaskModal({
     formState: { errors, isSubmitting },
   } = useForm<TaskFormData>({
     resolver: zodResolver(taskSchema),
-    defaultValues: {
+defaultValues: {
       title: "",
       description: "",
       dueDate: "",
       dueTime: "",
+      startTime: "",
+      endTime: "",
       priority: "medium",
       status: "todo",
       category: "",
@@ -73,6 +77,8 @@ export default function TaskModal({
         description: task.description || "",
         dueDate: task.dueDate || "",
         dueTime: task.dueTime || "",
+        startTime: task.startTime || "",
+        endTime: task.endTime || "",
         priority: task.priority,
         status: task.status,
         category: task.category || "",
@@ -83,6 +89,8 @@ export default function TaskModal({
         description: "",
         dueDate: "",
         dueTime: "",
+        startTime: "",
+        endTime: "",
         priority: "medium",
         status: "todo",
         category: "",
@@ -124,27 +132,49 @@ export default function TaskModal({
           />
         </div>
 
+        <div>
+          <label className="block text-xs font-medium text-gray-500 mb-1.5">
+            Due Date
+          </label>
+          <input
+            type="date"
+            {...register("dueDate")}
+            className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+          />
+        </div>
+
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="block text-xs font-medium text-gray-500 mb-1.5">
-              Due Date
+              Start Time
             </label>
             <input
-              type="date"
-              {...register("dueDate")}
+              type="time"
+              {...register("startTime")}
               className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
             />
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-500 mb-1.5">
-              Time
+              End Time
             </label>
             <input
               type="time"
-              {...register("dueTime")}
+              {...register("endTime")}
               className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
             />
           </div>
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium text-gray-500 mb-1.5">
+            Due Time
+          </label>
+          <input
+            type="time"
+            {...register("dueTime")}
+            className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+          />
         </div>
 
         <div>

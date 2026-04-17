@@ -18,6 +18,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { Task, Status, Priority } from "../types";
+import { googleCalendarService } from "./googleCalendarService";
 
 const TASKS_COLLECTION = "tasks";
 const SUBTASKS_COLLECTION = "subtasks";
@@ -50,11 +51,40 @@ export const taskService = {
       progress: data.progress || 0,
       reviewCount: 0,
       attachments: [],
+      googleEventId: null,
+      calendarSynced: false,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     };
 
     const docRef = await addDoc(collection(db, TASKS_COLLECTION), taskData);
+
+    try {
+      const userDoc = await getDoc(doc(db, "users", userId));
+      const userData = userDoc.data();
+      
+      if (userData?.calendarConnected && userData?.googleAccessToken) {
+        const googleEventId = await googleCalendarService.syncTaskToCalendar(
+          userId,
+          docRef.id,
+          {
+            title: data.title,
+            description: data.description,
+            dueDate: data.dueDate,
+            dueTime: data.dueTime,
+            startTime: data.startTime,
+            endTime: data.endTime,
+          },
+        );
+        await updateDoc(doc(db, TASKS_COLLECTION, docRef.id), {
+          googleEventId,
+          calendarSynced: true,
+        });
+      }
+    } catch (error) {
+      console.error("Failed to sync to Google Calendar:", error);
+    }
+
     return docRef.id;
   },
 
@@ -95,11 +125,41 @@ export const taskService = {
     });
   },
 
-  async updateTask(taskId: string, data: UpdateTaskData): Promise<void> {
+  async updateTask(
+    userId: string,
+    taskId: string,
+    data: UpdateTaskData,
+  ): Promise<void> {
     await updateDoc(doc(db, TASKS_COLLECTION, taskId), {
       ...data,
       updatedAt: serverTimestamp(),
     });
+
+    if (data.calendarSynced || data.dueDate || data.dueTime || data.title) {
+      try {
+        const taskDoc = await getDoc(doc(db, TASKS_COLLECTION, taskId));
+        const task = taskDoc.data() as any;
+        const googleEventId = task?.googleEventId;
+
+        if (task?.calendarSynced) {
+          await googleCalendarService.syncTaskToCalendar(
+            userId,
+            taskId,
+            {
+              title: data.title || task.title,
+              description: data.description || task.description,
+              dueDate: data.dueDate || task.dueDate,
+              dueTime: data.dueTime || task.dueTime,
+              startTime: data.startTime || task.startTime,
+              endTime: data.endTime || task.endTime,
+            },
+            googleEventId,
+          );
+        }
+      } catch (error) {
+        console.error("Failed to sync update to Google Calendar:", error);
+      }
+    }
   },
 
   async updateTaskStatus(taskId: string, status: Status): Promise<void> {
@@ -116,7 +176,21 @@ export const taskService = {
     });
   },
 
-  async deleteTask(taskId: string): Promise<void> {
+  async deleteTask(userId: string, taskId: string): Promise<void> {
+    const taskDoc = await getDoc(doc(db, TASKS_COLLECTION, taskId));
+    const taskData = taskDoc.data();
+
+    if (taskData?.googleEventId) {
+      try {
+        await googleCalendarService.deleteTaskFromCalendar(
+          userId,
+          taskData.googleEventId,
+        );
+      } catch (error) {
+        console.error("Failed to delete from Google Calendar:", error);
+      }
+    }
+
     const batch = writeBatch(db);
 
     const subtasksQuery = query(

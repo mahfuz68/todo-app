@@ -69,9 +69,10 @@ export const useTaskStore = create<TaskState>((set, get) => ({
   },
 
   updateTask: async (id, updates) => {
+    const userId = useAuthStore.getState().user?.id;
     set({ isLoading: true, error: null });
     try {
-      await taskService.updateTask(id, updates);
+      await taskService.updateTask(userId!, id, updates);
       set({ isLoading: false });
     } catch (error: any) {
       set({ error: error.message, isLoading: false });
@@ -79,9 +80,10 @@ export const useTaskStore = create<TaskState>((set, get) => ({
   },
 
   deleteTask: async (id) => {
+    const userId = useAuthStore.getState().user?.id;
     set({ isLoading: true, error: null });
     try {
-      await taskService.deleteTask(id);
+      await taskService.deleteTask(userId!, id);
       set({ isLoading: false });
     } catch (error: any) {
       set({ error: error.message, isLoading: false });

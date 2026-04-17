@@ -7,6 +7,8 @@ export interface Task {
   description?: string;
   dueDate?: string;
   dueTime?: string;
+  startTime?: string;
+  endTime?: string;
   priority: Priority;
   status: Status;
   category?: string;
@@ -15,6 +17,8 @@ export interface Task {
   notes?: string;
   createdAt: string;
   updatedAt: string;
+  googleEventId?: string;
+  calendarSynced?: boolean;
 }
 
 export interface Subtask {
@@ -28,6 +32,9 @@ export interface User {
   name: string;
   email: string;
   avatar?: string;
+  googleAccessToken?: string;
+  calendarConnected?: boolean;
+  fcmToken?: string;
 }
 
 export interface TaskFilters {

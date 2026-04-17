@@ -14,7 +14,6 @@ export interface Notification {
   type:
     | "task_assigned"
     | "review_added"
-    | "due_soon"
     | "task_completed"
     | "comment_added";
   taskId?: string;
@@ -165,18 +164,6 @@ export const notificationService = {
       type: "review_added",
       taskId,
       message: `${reviewerName} added a review to "${taskTitle}"`,
-    });
-  },
-
-  async notifyDueSoon(
-    userId: string,
-    taskId: string,
-    taskTitle: string,
-  ): Promise<void> {
-    await this.createNotification(userId, {
-      type: "due_soon",
-      taskId,
-      message: `"${taskTitle}" is due soon`,
     });
   },
 };

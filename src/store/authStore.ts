@@ -64,6 +64,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
             name: userData?.displayName || firebaseUser.displayName || "",
             email: firebaseUser.email || "",
             avatar: userData?.photoURL || firebaseUser.photoURL || undefined,
+            calendarConnected: userData?.calendarConnected || false,
+            fcmToken: userData?.fcmToken || undefined,
           };
 
           set({ firebaseUser, user, isAuthenticated: true, isLoading: false });
@@ -197,6 +199,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         name: userData?.displayName || firebaseUser.displayName || "",
         email: firebaseUser.email || "",
         avatar: userData?.photoURL || firebaseUser.photoURL || undefined,
+        calendarConnected: userData?.calendarConnected || false,
+        fcmToken: userData?.fcmToken || undefined,
       };
 
       set({ firebaseUser, user, isAuthenticated: true, isLoading: false });
